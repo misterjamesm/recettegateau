@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2022-02-03T15:16:34Z"
+  generation: 1
+  labels:
+    app: recettegateau
+  name: recettegateau
+  namespace: default
+  resourceVersion: "15902"
+  uid: 82a7276c-c64d-4beb-98d2-b41c5307c9ae
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: recettegateau
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: recettegateau
+    spec:
+      containers:
+      - image: mrice44/recettegateau:0.0.2.RELEASE
+        imagePullPolicy: IfNotPresent
+        name: recettegateau
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2022-02-03T15:16:40Z"
+    lastUpdateTime: "2022-02-03T15:16:40Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2022-02-03T15:16:34Z"
+    lastUpdateTime: "2022-02-03T15:16:40Z"
+    message: ReplicaSet "recettegateau-8b5994dc9" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
